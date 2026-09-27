@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dhours+ · Tus horas extra, registradas con un clic</title>
+    <meta
+      name="description"
+      content="Extensión de Chrome para registrar tus horas extra con un clic, exportar un Excel profesional a final de mes y conocer el tiempo de uso de tu ordenador. Tus datos no salen de tu navegador."
+    />
+    <meta property="og:title" content="Dhours+ · Tus horas extra, registradas con un clic" />
+    <meta property="og:description" content="Fin de jornada con un clic, avisos para no olvidarlo y un Excel profesional a final de mes." />
+    <meta property="og:image" content="https://dhoursapp-lang.github.io/img/promo-grande-1400x560.png" />
+    <meta property="og:url" content="https://dhoursapp-lang.github.io/" />
+    <meta name="theme-color" content="#26890d" />
+    <link rel="icon" href="img/icon-32.png" />
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        src: url('fonts/inter-latin-wght.woff2') format('woff2');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      :root {
+        --page: #f6f8f5;
+        --surface: #ffffff;
+        --surface-2: #eff4ec;
+        --border: #e1e7dd;
+        --text: #0f1712;
+        --text-2: #4a5550;
+        --accent: #86bc25;
+        --primary: #26890d;
+        --primary-dark: #046a38;
+        --primary-text: #1e6b0b;
+        --soft: #edf7e4;
+        --shadow: 0 30px 60px -30px rgba(16, 48, 20, 0.35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        color: var(--text);
+        background: var(--page);
+        -webkit-font-smoothing: antialiased;
+      }
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      a {
+        color: var(--primary-text);
+      }
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      em {
+        font-style: normal;
+        background: linear-gradient(135deg, #4ca81e, #046a38);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Cabecera */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--page) 85%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        height: 68px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        text-decoration: none;
+        margin-right: auto;
+      }
+      .brand img {
+        width: 34px;
+        height: 34px;
+      }
+      .nav a.link {
+        color: var(--text-2);
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+      }
+      .nav a.link:hover {
+        color: var(--text);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 48px;
+        padding: 0 22px;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .btn-primary {
+        color: #fff;
+        background: linear-gradient(135deg, #26890d, #046a38);
+        box-shadow: 0 12px 26px -12px rgba(38, 137, 13, 0.8);
+      }
+      .btn-ghost {
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+      .nav .btn {
+        height: 40px;
+        padding: 0 16px;
+        font-size: 14px;
+      }
+
+      /* Portada */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 72px 0 40px;
+        background:
+          radial-gradient(900px 500px at 85% 10%, rgba(134, 188, 37, 0.22), transparent 70%),
+          radial-gradient(700px 400px at 0% 100%, rgba(38, 137, 13, 0.1), transparent 70%);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 48px;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(40px, 6vw, 72px);
+        line-height: 1.03;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+      }
+      .hero p.lead {
+        margin: 22px 0 32px;
+        font-size: 21px;
+        line-height: 1.55;
+        color: var(--text-2);
+        max-width: 560px;
+      }
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .soon {
+        margin-top: 14px;
+        font-size: 14px;
+        color: var(--text-2);
+      }
+      .hero-visual {
+        position: relative;
+        justify-self: center;
+        width: min(400px, 100%);
+      }
+      .hero-visual img {
+        border-radius: 28px;
+        box-shadow: var(--shadow), 0 0 0 1px rgba(15, 23, 18, 0.06);
+      }
+
+      section {
+        padding: 72px 0;
+      }
+      .eyebrow {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+      h2 {
+        margin: 10px 0 14px;
+        font-size: clamp(30px, 4vw, 44px);
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+      }
+      .section-lead {
+        margin: 0 0 36px;
+        font-size: 19px;
+        line-height: 1.55;
+        color: var(--text-2);
+        max-width: 720px;
+      }
+
+      /* Problema */
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .card {
+        padding: 28px;
+        border-radius: 22px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+      .card h3 {
+        margin: 12px 0 8px;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+      }
+      .card p {
+        margin: 0;
+        color: var(--text-2);
+        line-height: 1.6;
+        font-size: 16.5px;
+      }
+      .who {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+      }
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      /* Vídeo */
+      .video {
+        border-radius: 24px;
+        overflow: hidden;
+        background: #000;
+        box-shadow: var(--shadow);
+      }
+
+      /* Funciones */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .feature {
+        padding: 26px;
+        border-radius: 20px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+      .feature .ico {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: var(--soft);
+        font-size: 22px;
+      }
+      .feature h3 {
+        margin: 16px 0 6px;
+        font-size: 19px;
+        letter-spacing: -0.015em;
+      }
+      .feature p {
+        margin: 0;
+        color: var(--text-2);
+        line-height: 1.55;
+        font-size: 15.5px;
+      }
+
+      /* Capturas */
+      .shots {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .shots img {
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 40px -28px rgba(16, 48, 20, 0.45);
+      }
+      .shots img:first-child {
+        grid-column: 1 / -1;
+      }
+
+      /* Privacidad */
+      .privacy {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 36px;
+        border-radius: 26px;
+        color: #fff;
+        background:
+          radial-gradient(600px 300px at 90% 0%, rgba(134, 188, 37, 0.45), transparent 70%),
+          linear-gradient(135deg, #26890d, #04552e);
+      }
+      .privacy .big {
+        font-size: 56px;
+      }
+      .privacy h2 {
+        margin: 0 0 8px;
+        color: #fff;
+      }
+      .privacy p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.88);
+      }
+      .privacy a {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      /* Preguntas */
+      details {
+        padding: 20px 24px;
+        border-radius: 18px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+      details + details {
+        margin-top: 12px;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      details p {
+        margin: 12px 0 0;
+        color: var(--text-2);
+        line-height: 1.6;
+      }
+
+      footer {
+        padding: 36px 0 48px;
+        border-top: 1px solid var(--border);
+        color: var(--text-2);
+        font-size: 15px;
+      }
+      .foot {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      @media (max-width: 860px) {
+        .hero-grid,
+        .two,
+        .features,
+        .shots {
+          grid-template-columns: 1fr;
+        }
+        .nav a.link {
+          display: none;
+        }
+        .privacy {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="#"><img src="img/icon-128.png" alt="" />Dhours+</a>
+        <a class="link" href="#video">Vídeo</a>
+        <a class="link" href="#funciones">Funciones</a>
+        <a class="link" href="privacidad.html">Privacidad</a>
+        <a class="btn btn-primary" href="#descargar">Añadir a Chrome</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <h1>Tus horas extra, <em>registradas con un clic.</em></h1>
+            <p class="lead">
+              Al acabar el día pulsas «Fin de jornada». A final de mes, descargas un Excel profesional con todos los días, las horas trabajadas y las
+              extra. Sin papelitos, sin olvidos y sin perseguir a nadie.
+            </p>
+            <div class="cta" id="descargar">
+              <a class="btn btn-primary" href="#descargar">Añadir a Chrome</a>
+              <a class="btn btn-ghost" href="#video">▶ Ver el vídeo</a>
+            </div>
+            <p class="soon">Muy pronto en la Chrome Web Store · Funciona en Google Chrome y Microsoft Edge.</p>
+          </div>
+          <div class="hero-visual">
+            <img src="img/popup.png" alt="El popup de Dhours+: jornada en curso con el botón Fin de jornada" width="720" height="1136" />
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <div class="wrap">
+          <div class="eyebrow">El problema</div>
+          <h2>Cada mes, la misma historia</h2>
+          <p class="section-lead">Apuntar las horas extra parece fácil… hasta que llega fin de mes.</p>
+          <div class="two">
+            <div class="card">
+              <span class="who"><span class="avatar" style="background: #14b8a6">L</span>Quien hace las horas</span>
+              <h3>«Ya lo apunto mañana»</h3>
+              <p>Sales tarde, lo dejas para el día siguiente y ya no recuerdas si saliste a las 19:00 o a las 19:30. Al final, papelitos y cálculos a ojo.</p>
+            </div>
+            <div class="card">
+              <span class="who"><span class="avatar" style="background: #f59e0b">J</span>Quien las recibe</span>
+              <h3>«¿Me mandáis las horas?»</h3>
+              <p>Recordatorios que nadie contesta y Excels que llegan tarde, incompletos y cada uno con su formato, con <code>####</code> incluido.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="video">
+        <div class="wrap">
+          <div class="eyebrow">En 1 minuto</div>
+          <h2>Así lo resuelve Dhours+</h2>
+          <div class="video">
+            <video src="video/dhours-promo.mp4" poster="img/poster.jpg" controls preload="none" playsinline></video>
+          </div>
+        </div>
+      </section>
+
+      <section id="funciones">
+        <div class="wrap">
+          <div class="eyebrow">Funciones</div>
+          <h2>Todo lo que necesitas, nada que te complique</h2>
+          <div class="features">
+            <div class="feature">
+              <span class="ico">⏱</span>
+              <h3>Fin de jornada con un clic</h3>
+              <p>Pulsa el icono al salir y listo. Calcula al momento lo trabajado y tus horas extra.</p>
+            </div>
+            <div class="feature">
+              <span class="ico">📅</span>
+              <h3>Tu horario, a tu manera</h3>
+              <p>Horas por día, entrada fija o variable y pausa incluida o no. Por ejemplo, de lunes a jueves 9 h y los viernes 7 h.</p>
+            </div>
+            <div class="feature">
+              <span class="ico">🔔</span>
+              <h3>Sin olvidos</h3>
+              <p>Te avisa al cumplir la jornada y, si no fichas, te propone la hora de tu último uso del ordenador.</p>
+            </div>
+            <div class="feature">
+              <span class="ico">📊</span>
+              <h3>Todo el mes de un vistazo</h3>
+              <p>Horas extra, de menos y saldo, con gráfico y tabla editable: festivos, vacaciones, bajas y notas.</p>
+            </div>
+            <div class="feature">
+              <span class="ico">📄</span>
+              <h3>Excel profesional</h3>
+              <p>Un día por fila, totales, fórmulas de verdad y espacio para firmas. Listo para imprimir o enviar.</p>
+            </div>
+            <div class="feature">
+              <span class="ico">💻</span>
+              <h3>Tiempo de uso</h3>
+              <p>Como en el móvil: cuándo enciendes el ordenador, cuánto lo usas y cuándo lo dejas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="eyebrow">Capturas</div>
+          <h2>Diseñada para usarla cada día</h2>
+          <div class="shots">
+            <img src="img/capturas/1-fin-de-jornada.png" alt="Registra tu salida con un clic" loading="lazy" />
+            <img src="img/capturas/2-resumen-del-mes.png" alt="Todo tu mes, de un vistazo" loading="lazy" />
+            <img src="img/capturas/3-excel.png" alt="El Excel de tus horas extra, en un clic" loading="lazy" />
+            <img src="img/capturas/4-sin-olvidos.png" alt="Te recuerda si se te olvida fichar" loading="lazy" />
+            <img src="img/capturas/5-tiempo-de-uso.png" alt="Tu tiempo de uso, como en el móvil" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="privacy">
+            <span class="big">🔒</span>
+            <div>
+              <h2>Tus datos no salen de tu navegador</h2>
+              <p>
+                Sin cuentas, sin servidores y sin publicidad. Dhours+ solo sabe si usas el ordenador, nunca qué haces en él.
+                <a href="privacidad.html">Lee la política de privacidad</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="eyebrow">Preguntas</div>
+          <h2>Preguntas frecuentes</h2>
+          <details>
+            <summary>¿Dónde se guardan mis horas?</summary>
+            <p>En el almacenamiento de la extensión dentro de tu navegador. Puedes descargar una copia de seguridad cuando quieras desde Ajustes.</p>
+          </details>
+          <details>
+            <summary>¿Funciona en Microsoft Edge?</summary>
+            <p>Sí. Edge es compatible con las extensiones de la Chrome Web Store.</p>
+          </details>
+          <details>
+            <summary>¿Sustituye al registro de jornada de mi empresa?</summary>
+            <p>No. Dhours+ es tu registro personal para llevar el control de tus horas y preparar tu Excel; no sustituye al sistema oficial de tu empresa.</p>
+          </details>
+          <details>
+            <summary>¿Cómo mide el tiempo de uso del ordenador?</summary>
+            <p>
+              Cada minuto comprueba si hay actividad de teclado o ratón, si el equipo está inactivo o si la pantalla está bloqueada. Funciona mientras
+              Chrome está en marcha.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap foot">
+        <span>© 2026 Dhours+</span>
+        <span><a href="privacidad.html">Privacidad</a> · <a href="mailto:dhours.app@gmail.com">dhours.app@gmail.com</a></span>
+      </div>
+    </footer>
+  </body>
+</html>

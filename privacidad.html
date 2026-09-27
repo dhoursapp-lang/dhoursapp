@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de privacidad · Dhours+</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #4b5569;
+        --line: #e4e7f0;
+        --accent: #26890d;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0f1f;
+          --card: #121933;
+          --text: #e8ecf8;
+          --muted: #aab4cf;
+          --line: #252f55;
+          --accent: #86bc25;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 40px 20px 60px;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          16px/1.6 'Segoe UI',
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 36px 40px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        margin: 32px 0 8px;
+        font-size: 19px;
+      }
+      p,
+      li {
+        color: var(--muted);
+      }
+      strong {
+        color: var(--text);
+      }
+      a,
+      a strong {
+        color: var(--accent);
+      }
+      .updated {
+        margin: 0 0 24px;
+        font-size: 14px;
+      }
+      .summary {
+        margin: 0 0 8px;
+        padding: 16px 18px;
+        border-left: 4px solid var(--accent);
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        color: var(--text);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+      }
+      th,
+      td {
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        color: var(--text);
+        white-space: nowrap;
+      }
+      td {
+        color: var(--muted);
+      }
+      code {
+        font-size: 14px;
+      }
+      @media (max-width: 600px) {
+        main {
+          padding: 24px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Política de privacidad de Dhours+</h1>
+      <p class="updated">Última actualización: 27 de septiembre de 2026</p>
+
+      <p class="summary">
+        <strong>En resumen:</strong> Dhours+ guarda tus datos solo en tu navegador. No tiene servidores, no usa analítica ni publicidad y no
+        envía tus datos a nadie.
+      </p>
+
+      <h2>Qué datos maneja la extensión</h2>
+      <ul>
+        <li><strong>Tu horario:</strong> días laborables, horas previstas, hora de entrada y pausa.</li>
+        <li><strong>Tus jornadas:</strong> horas de entrada y salida, tipo de día (trabajo, festivo, vacaciones, baja o libre) y las notas que escribas.</li>
+        <li><strong>Nombre y empresa</strong>, solo si los escribes, para la cabecera del Excel.</li>
+        <li>
+          <strong>Tiempo de uso del ordenador:</strong> tramos horarios en los que el equipo está activo (usas el teclado o el ratón), inactivo o
+          con la pantalla bloqueada.
+        </li>
+      </ul>
+
+      <h2>Qué no recoge nunca</h2>
+      <p>
+        No lee tu historial de navegación ni el contenido de las páginas. Tampoco registra lo que escribes, no hace capturas de pantalla, no
+        accede a tu ubicación y no identifica qué programas usas. Del teclado y el ratón solo sabe si hubo actividad en los últimos minutos, a
+        través del sistema de Chrome.
+      </p>
+
+      <h2>Dónde se guardan</h2>
+      <p>
+        Todo se guarda en el almacenamiento local de la extensión en tu navegador (<code>chrome.storage.local</code>). Ningún dato se envía a
+        servidores del desarrollador ni de terceros. No hay cuentas de usuario ni cookies.
+      </p>
+
+      <h2>Archivos que tú generas</h2>
+      <p>
+        Cuando exportas un Excel o una copia de seguridad, el archivo se guarda en tu equipo. Tú decides si lo compartes y con quién (por
+        ejemplo, con tu empresa).
+      </p>
+
+      <h2>Permisos que pide y para qué</h2>
+      <table>
+        <tr>
+          <th>Almacenamiento</th>
+          <td>Guardar tu horario, tus jornadas y el tiempo de uso en el navegador.</td>
+        </tr>
+        <tr>
+          <th>Alarmas</th>
+          <td>Comprobar cada minuto el estado del equipo y avisarte al cumplir la jornada.</td>
+        </tr>
+        <tr>
+          <th>Inactividad</th>
+          <td>Saber si el ordenador está en uso, inactivo o bloqueado, sin conocer qué haces.</td>
+        </tr>
+        <tr>
+          <th>Notificaciones</th>
+          <td>Avisarte de que has cumplido tu jornada, con un botón para registrar la salida.</td>
+        </tr>
+        <tr>
+          <th>Segundo plano</th>
+          <td>Seguir midiendo el tiempo de uso aunque cierres las ventanas de Chrome.</td>
+        </tr>
+      </table>
+
+      <h2>Cómo borrar tus datos</h2>
+      <p>
+        Desde el panel de la extensión: <strong>Ajustes → Borrar todo</strong>. Si desinstalas la extensión, Chrome borra también todos sus
+        datos.
+      </p>
+
+      <h2>Funciones de pago</h2>
+      <p>
+        Si en el futuro se ofrecen funciones de pago, el cobro lo gestionará un proveedor de pagos externo, y esta política se actualizará antes
+        de activarlo para explicar qué datos se comparten con él.
+      </p>
+
+      <h2>Cambios en esta política</h2>
+      <p>Cualquier cambio se publicará en esta página, con la fecha de actualización.</p>
+
+      <h2>Contacto</h2>
+      <p>Para cualquier duda sobre privacidad: <a href="mailto:dhours.app@gmail.com"><strong>dhours.app@gmail.com</strong></a>.</p>
+    </main>
+  </body>
+</html>
